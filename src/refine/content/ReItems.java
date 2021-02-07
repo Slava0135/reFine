@@ -1,4 +1,4 @@
-package content;
+package refine.content;
 
 import arc.graphics.Color;
 import mindustry.ctype.ContentList;

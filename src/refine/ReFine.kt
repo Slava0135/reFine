@@ -1,11 +1,14 @@
-import content.ReBlocks
-import content.ReItems
+package refine
+
+import refine.content.ReBlocks
+import refine.content.ReItems
 import mindustry.Vars
 import mindustry.content.Items
 import mindustry.mod.Mod
 import mindustry.world.blocks.environment.OreBlock
 
 class ReFine : Mod() {
+
     override fun loadContent() {
         ReBlocks().load()
         ReItems().load()

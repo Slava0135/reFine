@@ -1,10 +1,10 @@
-package content;
+package refine.content;
 
 import mindustry.ctype.ContentList;
 import mindustry.type.Category;
 import mindustry.world.Block;
 import mindustry.world.blocks.environment.OreBlock;
-import world.blocks.production.Furnace;
+import refine.world.blocks.production.Furnace;
 
 import static mindustry.type.ItemStack.with;
 
