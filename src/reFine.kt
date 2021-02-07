@@ -1,12 +1,14 @@
+import content.ReBlocks
 import content.ReItems
 import mindustry.Vars
 import mindustry.content.Items
 import mindustry.mod.Mod
 import mindustry.world.blocks.environment.OreBlock
 
-class reFine : Mod() {
-
-    init {
+class ReFine : Mod() {
+    override fun loadContent() {
+        ReBlocks().load()
+        ReItems().load()
 
         Items.coal.hardness = 1
 
@@ -19,5 +21,4 @@ class reFine : Mod() {
         val titanium = Vars.content.block("ore-titanium") as OreBlock
         titanium.itemDrop = ReItems.rawTitanium
     }
-
 }

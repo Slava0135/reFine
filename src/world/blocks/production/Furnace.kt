@@ -1,6 +1,7 @@
 package world.blocks.production
 
 import arc.Core.atlas
+import arc.func.Floatp
 import arc.graphics.Color
 import arc.graphics.g2d.Draw
 import arc.graphics.g2d.Fill
@@ -14,10 +15,13 @@ import mindustry.Vars
 import mindustry.content.Fx
 import mindustry.ctype.ContentType
 import mindustry.gen.Building
+import mindustry.gen.Nulls.entity
 import mindustry.gen.Sounds
 import mindustry.gen.Teamc
 import mindustry.graphics.Drawf
+import mindustry.graphics.Pal
 import mindustry.type.Item
+import mindustry.ui.Bar
 import mindustry.world.Block
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
@@ -29,7 +33,7 @@ open class Furnace(name: String) : Block(name) {
 
     var fuelFlammability = 0.5f
     var smeltTime = 60f
-    var fuelMultiplier = 600
+    var fuelMultiplier = 10
     var smeltEffect = Fx.smeltsmoke
     var updateEffectChance = 0.04
 
@@ -40,6 +44,11 @@ open class Furnace(name: String) : Block(name) {
         stats.add(Stat.input, ReItems.rawCopper)
         stats.add(Stat.input, ReItems.rawLead)
         stats.add(Stat.input, ReItems.rawTitanium)
+    }
+
+    override fun setBars() {
+        super.setBars()
+        bars.add("back") { entity: FurnaceBuild -> Bar("bar.input", Pal.lightOrange) { entity.fuelProgress } }
     }
 
     override fun init() {
@@ -110,7 +119,7 @@ open class Furnace(name: String) : Block(name) {
         override fun updateTile() {
             if (enabled) {
                 if (fuelProgress > 0) {
-                    fuelProgress -= getProgressIncrease(smeltTime)
+                    fuelProgress -= getProgressIncrease(smeltTime / fuelMultiplier)
                     if (Mathf.chanceDelta(updateEffectChance)) {
                         smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
                     }
@@ -122,10 +131,12 @@ open class Furnace(name: String) : Block(name) {
                         progress += getProgressIncrease(smeltTime)
                     }
                 } else {
-                    val fuel = getFuel()
-                    fuel?.let {
-                        fuelProgress += fuelMultiplier * fuel.flammability
-                        items.remove(fuel, 1)
+                    if (getOre() != null) {
+                        val fuel = getFuel()
+                        fuel?.let {
+                            fuelProgress = 1f
+                            items.remove(fuel, 1)
+                        }
                     }
                 }
             }
