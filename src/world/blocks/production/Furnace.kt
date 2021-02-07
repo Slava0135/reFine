@@ -23,7 +23,7 @@ open class Furnace(name: String) : Block(name) {
     val flameColor = Color.valueOf("ffc999")
     lateinit var topRegion: TextureRegion
 
-    var smeltTime = 60
+    var smeltTime = 60f
     var fuelMultiplier = 600
     var smeltEffect = Fx.smeltsmoke
     var updateEffectChance = 0.04
@@ -54,7 +54,7 @@ open class Furnace(name: String) : Block(name) {
 
     override fun outputsItems() = true
 
-    class FurnaceBuild : Building() {
+    inner class FurnaceBuild : Building() {
         var progress = 0f
         var warmup = 0f
         var fuelProgress = 0f
@@ -72,10 +72,10 @@ open class Furnace(name: String) : Block(name) {
 
                 Draw.alpha((1f - g + Mathf.absin(Time.time, 8f, g) + Mathf.random(r) - r) * warmup)
 
-                Draw.tint((block as Furnace).flameColor)
+                Draw.tint(flameColor)
                 Fill.circle(x, y, 3f + Mathf.absin(Time.time, 5f, 2f) + cr)
                 Draw.color(1f, 1f, 1f, warmup)
-                Draw.rect((block as Furnace).topRegion, x, y)
+                Draw.rect(topRegion, x, y)
                 Fill.circle(x, y, 1.9f + Mathf.absin(Time.time, 5f, 1f) + cr)
 
                 Draw.color()
@@ -83,13 +83,13 @@ open class Furnace(name: String) : Block(name) {
         }
 
         override fun drawLight() {
-            Drawf.light(team, x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, (block as Furnace).flameColor, 0.65f)
+            Drawf.light(team, x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, flameColor, 0.65f)
         }
 
         override fun updateTile() {
             if (enabled) {
-                fuelProgress -= getProgressIncrease((block as Furnace).smeltTime.toFloat())
-                progress += getProgressIncrease((block as Furnace).smeltTime.toFloat())
+                fuelProgress -= getProgressIncrease(smeltTime)
+                progress += getProgressIncrease(smeltTime)
             } else {
                 warmup = Mathf.lerp(warmup, 0f, 0.02f)
             }
