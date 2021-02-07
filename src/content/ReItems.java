@@ -18,8 +18,13 @@ public class ReItems implements ContentList {
 
         rawLead = new Item("raw-lead", Color.valueOf("8c7fa9")){{
             hardness = 1;
-            cost = 0.7f;
             alwaysUnlocked = true;
         }};
+
+        rawTitanium = new Item("raw-titanium", Color.valueOf("8da1e3")){{
+            hardness = 3;
+        }};
+
+        granite = new Item("granite", Color.valueOf("8B8265"));
     }
 }
