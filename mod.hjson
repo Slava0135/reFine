@@ -2,7 +2,7 @@ name: "refine"
 displayName: "reFine"
 author: "Slava0135"
 main: "io.slava0135.refine"
-description: "Alters early game progression and mining"
+description: "Alters early game progression and ore refining"
 version: "1.0"
 minGameVersion: 120
 
