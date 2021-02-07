@@ -10,7 +10,7 @@ import static mindustry.type.ItemStack.with;
 
 public class ReBlocks implements ContentList {
 
-    public static Block furnace, electricFurnace, oreGranite;
+    public static Block furnace, oreGranite;
 
     @Override
     public void load() {

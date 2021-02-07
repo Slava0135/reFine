@@ -29,7 +29,7 @@ open class Furnace(name: String) : Block(name) {
     lateinit var topRegion: TextureRegion
 
     var fuelFlammability = 0.5f
-    var smeltTime = 60f
+    var smeltTime = 30f
     var fuelMultiplier = 10
     var smeltEffect = Fx.smeltsmoke
     var updateEffectChance = 0.04
