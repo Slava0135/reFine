@@ -10,10 +10,14 @@ import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
 import content.ReItems
+import mindustry.Vars
 import mindustry.content.Fx
+import mindustry.ctype.ContentType
 import mindustry.gen.Building
 import mindustry.gen.Sounds
+import mindustry.gen.Teamc
 import mindustry.graphics.Drawf
+import mindustry.type.Item
 import mindustry.world.Block
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
@@ -23,6 +27,7 @@ open class Furnace(name: String) : Block(name) {
     val flameColor = Color.valueOf("ffc999")
     lateinit var topRegion: TextureRegion
 
+    var fuelFlammability = 0.5f
     var smeltTime = 60f
     var fuelMultiplier = 600
     var smeltEffect = Fx.smeltsmoke
@@ -86,16 +91,74 @@ open class Furnace(name: String) : Block(name) {
             Drawf.light(team, x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, flameColor, 0.65f)
         }
 
+        override fun getMaximumAccepted(item: Item?): Int {
+            return when {
+                item!!.name.contains("raw") -> {
+                    val ore = getOre()
+                    if (ore == null || ore == item) itemCapacity - items[item]
+                    else 0
+                }
+                item.flammability > fuelFlammability -> {
+                    val fuel = getFuel()
+                    if (fuel == null || fuel == item) itemCapacity - items[fuel]
+                    else 0
+                }
+                else -> 0
+            }
+        }
+
         override fun updateTile() {
             if (enabled) {
-                fuelProgress -= getProgressIncrease(smeltTime)
-                progress += getProgressIncrease(smeltTime)
-            } else {
+                if (fuelProgress > 0) {
+                    fuelProgress -= getProgressIncrease(smeltTime)
+                    if (Mathf.chanceDelta(updateEffectChance)) {
+                        smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
+                    }
+                    if (getOre() == null) {
+                        progress = 0f
+                        return
+                    } else {
+                        warmup = Mathf.lerpDelta(warmup, 1f, 0.02f)
+                        progress += getProgressIncrease(smeltTime)
+                    }
+                } else {
+                    val fuel = getFuel()
+                    fuel?.let {
+                        fuelProgress += fuelMultiplier * fuel.flammability
+                        items.remove(fuel, 1)
+                    }
+                }
+            }
+
+            if (!enabled || fuelProgress < 0) {
                 warmup = Mathf.lerp(warmup, 0f, 0.02f)
+                return
             }
 
             if (progress >= 1f) {
+                val ore = getOre()
+                ore?.let {
+                    items.remove(it, 1)
+                    offload(Vars.content.getByName(ContentType.item, it.name.removePrefix("raw-")))
+                }
+                progress = 0f
             }
+        }
+
+        fun getFuel(): Item? {
+            var item: Item? = null
+            items.each { i, _ ->
+                if (i.flammability > fuelFlammability) item = i
+            }
+            return item
+        }
+
+        fun getOre(): Item? {
+            var item: Item? = null
+            items.each { i, _ ->
+                if (i.name.startsWith("raw")) item = i
+            }
+            return item
         }
 
         override fun write(write: Writes?) {
