@@ -23,6 +23,7 @@ class ReBlocks : ContentList {
             init {
                 requirements(Category.production, ItemStack.with(ReItems.granite, 12))
                 size = 2
+                alwaysUnlocked = true
             }
         }
         electricFurnace = object : ElectricFurnace("electric-furnace") {
@@ -30,6 +31,7 @@ class ReBlocks : ContentList {
                 requirements(Category.production, ItemStack.with(ReItems.granite, 35, Items.graphite, 35, Items.titanium, 35))
                 consumes.power(1f)
                 size = 3
+                alwaysUnlocked = true
             }
         }
     }
