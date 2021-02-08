@@ -144,7 +144,6 @@ open class Furnace(name: String) : Block(name) {
 
             if (!enabled || fuelProgress < 0) {
                 warmup = Mathf.lerp(warmup, 0f, 0.02f)
-                return
             }
 
             if (progress >= 1f) {
