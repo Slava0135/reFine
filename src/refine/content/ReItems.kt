@@ -1,7 +1,9 @@
 package refine.content
 
 import arc.graphics.Color
+import mindustry.Vars
 import mindustry.ctype.ContentList
+import mindustry.ctype.ContentType
 import mindustry.type.Item
 
 class ReItems : ContentList {
@@ -32,5 +34,9 @@ class ReItems : ContentList {
         var rawLead: Item? = null
         var rawTitanium: Item? = null
         var granite: Item? = null
+
+        fun getCorrespondingItem(item: Item): Item {
+            return Vars.content.getByName(ContentType.item, item.name.removePrefix("refine-raw-"))
+        }
     }
 }

@@ -70,6 +70,9 @@ open class Furnace(name: String) : Block(name) {
         var warmup = 0f
         var fuelProgress = 0f
 
+        var fuel: Item? = null
+        var ore: Item? = null
+
         override fun shouldConsume() = enabled && warmup > 0
         override fun shouldAmbientSound() = enabled && warmup > 0
 
@@ -102,12 +105,12 @@ open class Furnace(name: String) : Block(name) {
         override fun getMaximumAccepted(item: Item?): Int {
             return when {
                 item!!.name.contains("raw") -> {
-                    val ore = getOre()
+                    val ore = findOre()
                     if (ore == null || ore == item) itemCapacity
                     else 0
                 }
                 item.flammability > fuelFlammability -> {
-                    val fuel = getFuel()
+                    val fuel = findFuel()
                     if (fuel == null || fuel == item) itemCapacity
                     else 0
                 }
@@ -116,13 +119,17 @@ open class Furnace(name: String) : Block(name) {
         }
 
         override fun updateTile() {
+
+            ore = findOre()
+            fuel = findFuel()
+
             if (enabled) {
                 if (fuelProgress > 0) {
                     fuelProgress -= getProgressIncrease(smeltTime * fuelMultiplier)
                     if (Mathf.chanceDelta(updateEffectChance)) {
                         smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
                     }
-                    if (getOre() == null) {
+                    if (ore == null || items[ore] >= itemCapacity) {
                         progress = 0f
                         return
                     } else {
@@ -130,8 +137,7 @@ open class Furnace(name: String) : Block(name) {
                         progress += getProgressIncrease(smeltTime)
                     }
                 } else {
-                    if (getOre() != null) {
-                        val fuel = getFuel()
+                    if (ore != null) {
                         fuel?.let {
                             fuelProgress = 1f
                             items.remove(fuel, 1)
@@ -146,16 +152,15 @@ open class Furnace(name: String) : Block(name) {
             }
 
             if (progress >= 1f) {
-                val ore = getOre()
                 ore?.let {
                     items.remove(it, 1)
-                    offload(Vars.content.getByName(ContentType.item, it.name.removePrefix("raw-")))
+                    items.add(ReItems.getCorrespondingItem(it), 1)
                 }
                 progress = 0f
             }
         }
 
-        private fun getFuel(): Item? {
+        private fun findFuel(): Item? {
             var item: Item? = null
             items.each { i, _ ->
                 if (i.flammability > fuelFlammability) item = i
@@ -163,7 +168,7 @@ open class Furnace(name: String) : Block(name) {
             return item
         }
 
-        private fun getOre(): Item? {
+        private fun findOre(): Item? {
             var item: Item? = null
             items.each { i, _ ->
                 if (i.name.contains("raw")) item = i
