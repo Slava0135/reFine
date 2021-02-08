@@ -13,8 +13,8 @@ class ReBlocks : ContentList {
         oreGranite = object : OreBlock(ReItems.granite) {
             init {
                 oreDefault = true
-                oreThreshold = 0.882f
-                oreScale = 24.904762f
+                oreThreshold = 0.88f
+                oreScale = 24.5f
             }
         }
         furnace = object : Furnace("furnace") {
