@@ -2,7 +2,7 @@ name: "refine"
 displayName: "reFine"
 author: "Slava0135"
 main: "refine.ReFine"
-description: "Ore refining and more!"
+description: "Making materials and game harder"
 version: "1.0"
 minGameVersion: 120
 
