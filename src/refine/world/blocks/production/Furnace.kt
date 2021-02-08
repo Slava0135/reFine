@@ -128,13 +128,12 @@ open class Furnace(name: String) : Block(name) {
                     }
                     if (ore == null || items[ReItems.getCorrespondingItem(ore)] == itemCapacity) {
                         progress = 0f
-                        return
                     } else {
                         warmup = Mathf.lerpDelta(warmup, 1f, 0.02f)
                         progress += getProgressIncrease(smeltTime)
                     }
                 } else {
-                    if (ore != null) {
+                    if (ore != null && items[ReItems.getCorrespondingItem(ore)] < itemCapacity) {
                         fuel?.let {
                             fuelProgress = 1f
                             items.remove(fuel, 1)
@@ -156,9 +155,7 @@ open class Furnace(name: String) : Block(name) {
                 progress = 0f
             }
 
-            ore?.let {
-                dump(ReItems.getCorrespondingItem(it))
-            }
+            items.each { item, _ -> if (getMaximumAccepted(item) == 0) dump (item) }
         }
 
         private fun findFuel(): Item? {
