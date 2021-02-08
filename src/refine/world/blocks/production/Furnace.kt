@@ -153,7 +153,7 @@ open class Furnace(name: String) : Block(name) {
             }
         }
 
-        fun getFuel(): Item? {
+        private fun getFuel(): Item? {
             var item: Item? = null
             items.each { i, _ ->
                 if (i.flammability > fuelFlammability) item = i
@@ -161,10 +161,10 @@ open class Furnace(name: String) : Block(name) {
             return item
         }
 
-        fun getOre(): Item? {
+        private fun getOre(): Item? {
             var item: Item? = null
             items.each { i, _ ->
-                if (i.name.startsWith("raw")) item = i
+                if (i.name.contains("raw")) item = i
             }
             return item
         }

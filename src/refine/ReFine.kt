@@ -9,8 +9,8 @@ import mindustry.world.blocks.environment.OreBlock
 
 class ReFine : Mod() {
     override fun loadContent() {
-        ReBlocks().load()
         ReItems().load()
+        ReBlocks().load()
 
         Items.coal.hardness = 1
 
