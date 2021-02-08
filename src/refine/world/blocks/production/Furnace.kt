@@ -70,9 +70,6 @@ open class Furnace(name: String) : Block(name) {
         var warmup = 0f
         var fuelProgress = 0f
 
-        var fuel: Item? = null
-        var ore: Item? = null
-
         override fun shouldConsume() = enabled && warmup > 0
         override fun shouldAmbientSound() = enabled && warmup > 0
 
@@ -120,8 +117,8 @@ open class Furnace(name: String) : Block(name) {
 
         override fun updateTile() {
 
-            ore = findOre()
-            fuel = findFuel()
+            val ore = findOre()
+            val fuel = findFuel()
 
             if (enabled) {
                 if (fuelProgress > 0) {
@@ -129,7 +126,7 @@ open class Furnace(name: String) : Block(name) {
                     if (Mathf.chanceDelta(updateEffectChance)) {
                         smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
                     }
-                    if (ore == null || items[ore] >= itemCapacity) {
+                    if (ore == null || items[ReItems.getCorrespondingItem(ore)] == itemCapacity) {
                         progress = 0f
                         return
                     } else {
@@ -159,10 +156,8 @@ open class Furnace(name: String) : Block(name) {
                 progress = 0f
             }
 
-            items.each { item, _ ->
-                if (getMaximumAccepted(item) == 0) {
-                    dump(item)
-                }
+            ore?.let {
+                dump(ReItems.getCorrespondingItem(it))
             }
         }
 
