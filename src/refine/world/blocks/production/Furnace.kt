@@ -97,16 +97,18 @@ open class Furnace(name: String) : Block(name) {
             Drawf.light(team, x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, flameColor, 0.65f)
         }
 
+        override fun acceptItem(source: Building?, item: Item?) = getMaximumAccepted(item) > 0
+
         override fun getMaximumAccepted(item: Item?): Int {
             return when {
                 item!!.name.contains("raw") -> {
                     val ore = getOre()
-                    if (ore == null || ore == item) itemCapacity - items[item]
+                    if (ore == null || ore == item) itemCapacity
                     else 0
                 }
                 item.flammability > fuelFlammability -> {
                     val fuel = getFuel()
-                    if (fuel == null || fuel == item) itemCapacity - items[fuel]
+                    if (fuel == null || fuel == item) itemCapacity
                     else 0
                 }
                 else -> 0

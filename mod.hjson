@@ -2,7 +2,7 @@ name: "refine"
 displayName: "reFine"
 author: "Slava0135"
 main: "refine.ReFine"
-description: "Alters early game progression and ore refining"
+description: "Ore refining and more!"
 version: "1.0"
 minGameVersion: 120
 
