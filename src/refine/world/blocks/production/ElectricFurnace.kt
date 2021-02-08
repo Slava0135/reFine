@@ -116,7 +116,7 @@ open class ElectricFurnace(name: String) : Block(name) {
                 }
             }
 
-            if (!enabled) {
+            if (!enabled || power.status == 0f) {
                 warmup = Mathf.lerp(warmup, 0f, 0.02f)
             }
 
