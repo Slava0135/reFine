@@ -1,4 +1,4 @@
-![logo](preview.png)
+![logo](assets/preview.png)
 
 ## Additions
 #### Raw resources
