@@ -158,6 +158,12 @@ open class Furnace(name: String) : Block(name) {
                 }
                 progress = 0f
             }
+
+            items.each { item, _ ->
+                if (getMaximumAccepted(item) == 0) {
+                    dump(item)
+                }
+            }
         }
 
         private fun findFuel(): Item? {
