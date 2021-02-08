@@ -70,6 +70,8 @@ open class Furnace(name: String) : Block(name) {
         var warmup = 0f
         var fuelProgress = 0f
 
+        var lastFuel = 0f
+
         override fun shouldConsume() = enabled && warmup > 0
         override fun shouldAmbientSound() = enabled && warmup > 0
 
@@ -122,7 +124,7 @@ open class Furnace(name: String) : Block(name) {
 
             if (enabled) {
                 if (fuelProgress > 0) {
-                    fuelProgress -= getProgressIncrease(smeltTime * fuelMultiplier)
+                    fuelProgress -= getProgressIncrease(lastFuel * smeltTime * fuelMultiplier)
                     if (Mathf.chanceDelta(updateEffectChance)) {
                         smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
                     }
@@ -136,6 +138,7 @@ open class Furnace(name: String) : Block(name) {
                     if (ore != null && items[ReItems.getCorrespondingItem(ore)] < itemCapacity) {
                         fuel?.let {
                             fuelProgress = 1f
+                            lastFuel = it.flammability
                             items.remove(fuel, 1)
                         }
                     }
