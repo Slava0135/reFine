@@ -8,7 +8,6 @@ import mindustry.mod.Mod
 import mindustry.world.blocks.environment.OreBlock
 
 class ReFine : Mod() {
-
     override fun loadContent() {
         ReBlocks().load()
         ReItems().load()
