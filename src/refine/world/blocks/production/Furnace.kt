@@ -97,7 +97,7 @@ open class Furnace(name: String) : Block(name) {
             Drawf.light(team, x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, flameColor, 0.65f)
         }
 
-        override fun acceptItem(source: Building?, item: Item?) = getMaximumAccepted(item) in 0 until itemCapacity
+        override fun acceptItem(source: Building?, item: Item?) = items[item] < itemCapacity && getMaximumAccepted(item) > 0
 
         override fun getMaximumAccepted(item: Item?): Int {
             return when {

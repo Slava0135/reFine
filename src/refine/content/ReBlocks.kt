@@ -13,7 +13,7 @@ class ReBlocks : ContentList {
         oreGranite = object : OreBlock(ReItems.granite) {
             init {
                 oreDefault = true
-                oreThreshold = 0.80f
+                oreThreshold = 0.90f
                 oreScale = 20f
             }
         }
