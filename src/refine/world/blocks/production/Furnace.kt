@@ -45,7 +45,7 @@ open class Furnace(name: String) : Block(name) {
 
     override fun setBars() {
         super.setBars()
-        bars.add("back") { entity: FurnaceBuild -> Bar("bar.input", Pal.lightOrange) { entity.fuelProgress } }
+        bars.add("back") { entity: FurnaceBuild -> Bar("bar.fuel", Pal.lightOrange) { entity.fuelProgress } }
     }
 
     override fun init() {
