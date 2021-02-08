@@ -97,7 +97,7 @@ open class Furnace(name: String) : Block(name) {
             Drawf.light(team, x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, flameColor, 0.65f)
         }
 
-        override fun acceptItem(source: Building?, item: Item?) = getMaximumAccepted(item) > 0
+        override fun acceptItem(source: Building?, item: Item?) = getMaximumAccepted(item) in 0 until itemCapacity
 
         override fun getMaximumAccepted(item: Item?): Int {
             return when {
@@ -118,7 +118,7 @@ open class Furnace(name: String) : Block(name) {
         override fun updateTile() {
             if (enabled) {
                 if (fuelProgress > 0) {
-                    fuelProgress -= getProgressIncrease(smeltTime / fuelMultiplier)
+                    fuelProgress -= getProgressIncrease(smeltTime * fuelMultiplier)
                     if (Mathf.chanceDelta(updateEffectChance)) {
                         smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
                     }
