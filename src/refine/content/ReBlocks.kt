@@ -12,7 +12,7 @@ import refine.world.blocks.production.Furnace
 class ReBlocks : ContentList {
 
     override fun load() {
-        oreGranite = object : OreBlock(ReItems.granite) {
+        oreBasalt = object : OreBlock(ReItems.basalt) {
             init {
                 oreDefault = true
                 oreThreshold = 0.88f
@@ -21,14 +21,14 @@ class ReBlocks : ContentList {
         }
         furnace = object : Furnace("furnace") {
             init {
-                requirements(Category.production, ItemStack.with(ReItems.granite, 12))
+                requirements(Category.production, ItemStack.with(ReItems.basalt, 12))
                 size = 2
                 alwaysUnlocked = true
             }
         }
         electricFurnace = object : ElectricFurnace("electric-furnace") {
             init {
-                requirements(Category.production, ItemStack.with(ReItems.granite, 35, Items.graphite, 35, Items.titanium, 35))
+                requirements(Category.production, ItemStack.with(ReItems.basalt, 35, Items.graphite, 35, Items.titanium, 35))
                 consumes.power(1f)
                 size = 3
                 alwaysUnlocked = true
@@ -38,7 +38,7 @@ class ReBlocks : ContentList {
 
     companion object {
         var furnace: Block? = null
-        var oreGranite: Block? = null
+        var oreBasalt: Block? = null
         var electricFurnace: Block? = null
     }
 }

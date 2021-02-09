@@ -26,14 +26,14 @@ class ReItems : ContentList {
                 hardness = 3
             }
         }
-        granite = Item("granite", Color.valueOf("8B8265"))
+        basalt = Item("basalt", Color.valueOf("8B8265"))
     }
 
     companion object {
         var rawCopper: Item? = null
         var rawLead: Item? = null
         var rawTitanium: Item? = null
-        var granite: Item? = null
+        var basalt: Item? = null
 
         fun getCorrespondingItem(item: Item): Item {
             return Vars.content.getByName(ContentType.item, item.name.removePrefix("refine-raw-"))
