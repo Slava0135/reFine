@@ -4,6 +4,7 @@ import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.content.Items
 import mindustry.mod.Mod
+import mindustry.type.ItemStack
 import mindustry.world.blocks.defense.turrets.LiquidTurret
 import mindustry.world.blocks.environment.OreBlock
 import refine.content.*
@@ -25,5 +26,8 @@ class ReFine : Mod() {
 
         (Blocks.tsunami as LiquidTurret).ammoTypes.put(ReLiquids.acid, ReBullets.acidTsunami)
         (Blocks.wave as LiquidTurret).ammoTypes.put(ReLiquids.acid, ReBullets.acidWave)
+
+        Blocks.battery.requirements.plus(ItemStack(ReItems.sulfur, 50))
+        Blocks.batteryLarge.requirements.plus(ItemStack(ReItems.sulfur, 100))
     }
 }

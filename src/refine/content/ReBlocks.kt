@@ -1,11 +1,14 @@
 package refine.content
 
+import mindustry.content.Fx
 import mindustry.content.Items
+import mindustry.content.Liquids
 import mindustry.ctype.ContentList
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.world.Block
 import mindustry.world.blocks.environment.OreBlock
+import mindustry.world.blocks.production.GenericCrafter
 import refine.world.blocks.production.ElectricFurnace
 import refine.world.blocks.production.Furnace
 
@@ -34,11 +37,25 @@ class ReBlocks : ContentList {
                 alwaysUnlocked = true
             }
         }
+        sulfurCentrifuge = object : GenericCrafter("sulfur-centrifuge") {
+            init {
+                requirements(Category.crafting, ItemStack.with(Items.titanium, 50, Items.graphite, 40, Items.lead, 30))
+                craftEffect = Fx.smeltsmoke
+                outputItem = ItemStack(ReItems.sulfur, 1)
+                craftTime = 60f
+                size = 2
+                hasPower = true.also { hasLiquids = it }.also { hasItems = it }
+
+                consumes.liquid(Liquids.oil, 0.1f)
+                consumes.power(1f)
+            }
+        }
     }
 
     companion object {
         var furnace: Block? = null
         var oreBasalt: Block? = null
         var electricFurnace: Block? = null
+        var sulfurCentrifuge: Block? = null
     }
 }
