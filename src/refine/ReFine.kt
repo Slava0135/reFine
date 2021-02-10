@@ -12,9 +12,9 @@ import refine.content.*
 class ReFine : Mod() {
     override fun loadContent() {
         ReItems().load()
-        ReBlocks().load()
         ReLiquids().load()
         ReFX().load()
+        ReBlocks().load()
         ReStatusEffects().load()
         ReBullets().load()
 
