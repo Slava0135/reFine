@@ -6,9 +6,12 @@ import mindustry.content.Liquids
 import mindustry.ctype.ContentList
 import mindustry.type.Category
 import mindustry.type.ItemStack
+import mindustry.type.LiquidStack
 import mindustry.world.Block
 import mindustry.world.blocks.environment.OreBlock
 import mindustry.world.blocks.production.GenericCrafter
+import mindustry.world.blocks.production.LiquidConverter
+import mindustry.world.draw.DrawMixer
 import refine.world.blocks.production.ElectricFurnace
 import refine.world.blocks.production.Furnace
 
@@ -50,6 +53,24 @@ class ReBlocks : ContentList {
                 consumes.power(1f)
             }
         }
+        acidMixer = object : LiquidConverter("acid-mixer") {
+            init {
+                requirements(Category.crafting, ItemStack.with(Items.lead, 65, Items.silicon, 40, Items.titanium, 60))
+                outputLiquid = LiquidStack(ReLiquids.acid, 0.1f)
+                craftTime = 60f
+                size = 2
+                hasPower = true
+                hasItems = true
+                hasLiquids = true
+                rotate = false
+                solid = true
+                outputsLiquid = true
+                drawer = DrawMixer()
+                consumes.power(1f)
+                consumes.item(ReItems.sulfur)
+                consumes.liquid(Liquids.water, 0.1f)
+            }
+        }
     }
 
     companion object {
@@ -57,5 +78,6 @@ class ReBlocks : ContentList {
         var oreBasalt: Block? = null
         var electricFurnace: Block? = null
         var sulfurCentrifuge: Block? = null
+        var acidMixer: Block? = null
     }
 }
