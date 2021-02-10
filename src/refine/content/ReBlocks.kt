@@ -45,7 +45,7 @@ class ReBlocks : ContentList {
                 requirements(Category.crafting, ItemStack.with(Items.titanium, 50, Items.graphite, 40, Items.lead, 30))
                 craftEffect = Fx.smeltsmoke
                 outputItem = ItemStack(ReItems.sulfur, 1)
-                craftTime = 60f
+                craftTime = 30f
                 size = 2
                 hasPower = true.also { hasLiquids = it }.also { hasItems = it }
 
