@@ -7,6 +7,7 @@ import mindustry.mod.Mod
 import mindustry.type.ItemStack
 import mindustry.world.blocks.defense.turrets.LiquidTurret
 import mindustry.world.blocks.environment.OreBlock
+import mindustry.world.consumers.ConsumeType
 import refine.content.*
 
 class ReFine : Mod() {
@@ -29,5 +30,7 @@ class ReFine : Mod() {
 
         Blocks.battery.requirements = Blocks.battery.requirements.plus(ItemStack(ReItems.sulfur, 50))
         Blocks.batteryLarge.requirements = Blocks.batteryLarge.requirements.plus(ItemStack(ReItems.sulfur, 100))
+
+        Blocks.pyratiteMixer.consumes.items(*ItemStack.with(Items.coal, 1, ReItems.sulfur, 2, Items.sand, 2))
     }
 }
