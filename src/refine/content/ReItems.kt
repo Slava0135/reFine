@@ -26,7 +26,7 @@ class ReItems : ContentList {
                 hardness = 3
             }
         }
-        basalt = Item("basalt", Color.valueOf("8B8265"))
+        basalt = Item("basalt", Color.valueOf("5e6364"))
     }
 
     companion object {
