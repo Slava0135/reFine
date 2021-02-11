@@ -28,7 +28,6 @@ class ReFine : Mod() {
         (Blocks.tsunami as LiquidTurret).ammoTypes.put(ReLiquids.acid, ReBullets.acidTsunami)
         (Blocks.wave as LiquidTurret).ammoTypes.put(ReLiquids.acid, ReBullets.acidWave)
 
-        Blocks.battery.requirements = Blocks.battery.requirements.plus(ItemStack(ReItems.sulfur, 50))
         Blocks.batteryLarge.requirements = Blocks.batteryLarge.requirements.plus(ItemStack(ReItems.sulfur, 100))
 
         Blocks.pyratiteMixer.consumes.items(*ItemStack.with(Items.coal, 1, ReItems.sulfur, 2, Items.sand, 2))
