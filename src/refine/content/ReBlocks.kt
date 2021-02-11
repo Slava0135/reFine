@@ -51,6 +51,8 @@ class ReBlocks : ContentList {
 
                 consumes.liquid(Liquids.oil, 0.1f)
                 consumes.power(1f)
+
+                alwaysUnlocked = true
             }
         }
         acidMixer = object : LiquidConverter("acid-mixer") {
@@ -69,6 +71,8 @@ class ReBlocks : ContentList {
                 consumes.power(1f)
                 consumes.item(ReItems.sulfur)
                 consumes.liquid(Liquids.water, 0.1f)
+
+                alwaysUnlocked = true
             }
         }
     }
