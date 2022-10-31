@@ -1,6 +1,5 @@
 package refine
 
-import mindustry.Vars
 import mindustry.content.Blocks
 import mindustry.content.Items
 import mindustry.mod.Mod
@@ -8,6 +7,7 @@ import mindustry.type.ItemStack
 import mindustry.world.blocks.defense.turrets.LiquidTurret
 import mindustry.world.blocks.environment.Floor
 import mindustry.world.blocks.environment.OreBlock
+import mindustry.world.consumers.ConsumeItems
 import refine.content.*
 
 class ReFine : Mod() {
@@ -38,6 +38,8 @@ class ReFine : Mod() {
 
         Blocks.batteryLarge.requirements = Blocks.batteryLarge.requirements.plus(ItemStack(ReItems.sulfur, 100))
 
+        val c = Blocks.pyratiteMixer.findConsumer<ConsumeItems> { it is ConsumeItems }
+        Blocks.pyratiteMixer.removeConsumer(c)
         Blocks.pyratiteMixer.consumeItems(*ItemStack.with(Items.coal, 1, ReItems.sulfur, 2, Items.sand, 2))
     }
 }
