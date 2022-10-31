@@ -45,6 +45,7 @@ class ReBlocks {
             electricFurnace = ElectricFurnace("electric-furnace").apply {
                 requirements(Category.production, ItemStack.with(ReItems.basalt, 35, Items.graphite, 35, Items.titanium, 35))
                 consumePower(1f)
+                consumeLiquid(ReLiquids.acid, acidPerOre / smeltTime).boost().update = false
                 size = 3
                 alwaysUnlocked = true
             }

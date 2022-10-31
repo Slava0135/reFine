@@ -10,6 +10,7 @@ import arc.util.Time
 import arc.util.io.Reads
 import arc.util.io.Writes
 import mindustry.content.Fx
+import mindustry.content.Liquids
 import mindustry.gen.Building
 import mindustry.gen.Sounds
 import mindustry.graphics.Drawf
@@ -18,6 +19,7 @@ import mindustry.world.Block
 import mindustry.world.meta.Stat
 import mindustry.world.meta.StatUnit
 import refine.content.ReItems
+import refine.content.ReLiquids
 
 open class ElectricFurnace(name: String) : Block(name) {
 
@@ -27,10 +29,12 @@ open class ElectricFurnace(name: String) : Block(name) {
     var smeltTime = 30f
     var smeltEffect = Fx.smeltsmoke
     var updateEffectChance = 0.04
+    var acidPerOre = 1f
 
     override fun setStats() {
         super.setStats()
         stats.add(Stat.productionTime, smeltTime / 60f, StatUnit.seconds)
+        stats.add(Stat.productionTime, 1 / smeltTime / 60f, StatUnit.perSecond)
 
         stats.add(Stat.input, ReItems.rawCopper)
         stats.add(Stat.input, ReItems.rawLead)
@@ -42,6 +46,7 @@ open class ElectricFurnace(name: String) : Block(name) {
         update = true
         solid = true
         hasItems = true
+        hasLiquids = true
         sync = true
         consumesPower = true
         ambientSound = Sounds.smelter
@@ -123,8 +128,12 @@ open class ElectricFurnace(name: String) : Block(name) {
 
             if (progress >= 1f) {
                 ore?.let {
-                    items.remove(it, 1)
+                    if (liquids.currentAmount() > acidPerOre) {
+                        liquids.remove(ReLiquids.acid, acidPerOre)
+                        items.add(ReItems.getCorrespondingItem(it), 1)
+                    }
                     items.add(ReItems.getCorrespondingItem(it), 1)
+                    items.remove(it, 1)
                 }
                 progress = 0f
             }
