@@ -105,14 +105,15 @@ open class ElectricFurnace(name: String) : Block(name) {
             val ore = findOre()
 
             if (enabled && ore != null) {
-                if (Mathf.chanceDelta(updateEffectChance)) {
-                    smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
-                }
-                if (items[ReItems.getCorrespondingItem(ore)] == itemCapacity) {
-                    progress = 0f
-                } else {
+                if (items[ReItems.getCorrespondingItem(ore)] < itemCapacity) {
                     warmup = Mathf.lerpDelta(warmup, power.status, 0.02f)
                     progress += getProgressIncrease(smeltTime)
+                    if (Mathf.chanceDelta(power.status * updateEffectChance)) {
+                        smeltEffect.at(getX() + Mathf.range(size * 4f), getY() + Mathf.range(size * 4))
+                    }
+                } else {
+                    warmup = Mathf.lerp(warmup, 0f, 0.02f)
+                    progress = 0f
                 }
             }
 
