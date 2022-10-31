@@ -45,7 +45,7 @@ open class Furnace(name: String) : Block(name) {
 
     override fun setBars() {
         super.setBars()
-        bars.add("back") { entity: FurnaceBuild -> Bar("bar.fuel", Pal.lightOrange) { entity.fuelProgress } }
+        addBar("back") { entity: FurnaceBuild -> Bar("bar.fuel", Pal.lightOrange) { entity.fuelProgress } }
     }
 
     override fun init() {
@@ -59,7 +59,7 @@ open class Furnace(name: String) : Block(name) {
     }
 
     override fun load() {
-        super.load();
+        super.load()
         topRegion = atlas.find("$name-top")
     }
 
@@ -96,14 +96,14 @@ open class Furnace(name: String) : Block(name) {
         }
 
         override fun drawLight() {
-            Drawf.light(team, x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, flameColor, 0.65f)
+            Drawf.light(x, y, (60f + Mathf.absin(10f, 5f)) * warmup * block.size, flameColor, 0.65f)
         }
 
-        override fun acceptItem(source: Building?, item: Item?) = items[item] < itemCapacity && getMaximumAccepted(item) > 0
+        override fun acceptItem(source: Building, item: Item) = items[item] < itemCapacity && getMaximumAccepted(item) > 0
 
-        override fun getMaximumAccepted(item: Item?): Int {
+        override fun getMaximumAccepted(item: Item): Int {
             return when {
-                item!!.name.contains("raw") -> {
+                item.name.contains("raw") -> {
                     val ore = findOre()
                     if (ore == null || ore == item) itemCapacity
                     else 0
@@ -176,16 +176,16 @@ open class Furnace(name: String) : Block(name) {
             return item
         }
 
-        override fun write(write: Writes?) {
+        override fun write(write: Writes) {
             super.write(write)
-            write!!.f(progress)
+            write.f(progress)
             write.f(warmup)
             write.f(fuelProgress)
         }
 
-        override fun read(read: Reads?, revision: Byte) {
+        override fun read(read: Reads, revision: Byte) {
             super.read(read, revision)
-            progress = read!!.f()
+            progress = read.f()
             warmup = read.f()
             fuelProgress = read.f()
         }

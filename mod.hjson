@@ -3,6 +3,6 @@ displayName: "reFine"
 author: "Slava0135"
 main: "refine.ReFine"
 description: "Raw materials processing"
-version: "2.2"
-minGameVersion: 120
+version: "3.0"
+minGameVersion: 136
 

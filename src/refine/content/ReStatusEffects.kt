@@ -1,23 +1,26 @@
 package refine.content
 
 import arc.graphics.Color
-import mindustry.ctype.ContentList
+import arc.math.Mathf
+import mindustry.content.Fx
+import mindustry.content.StatusEffects
+import mindustry.entities.units.StatusEntry
+import mindustry.gen.Unit
 import mindustry.type.StatusEffect
 
-class ReStatusEffects : ContentList {
-    override fun load() {
-        melting = object : StatusEffect("melting") {
-            init {
-                color = Color.valueOf("f1dd38")
-                speedMultiplier = 0.8f
-                healthMultiplier = 0.8f
-                damage = 1f
-                effect = ReFX.melting
-            }
-        }
-    }
+class ReStatusEffects {
 
     companion object {
-        var melting: StatusEffect? = null
+        lateinit var melting: StatusEffect
+    }
+
+    fun load() {
+        melting = object : StatusEffect("acid-melting") {}.apply {
+            color = Color.valueOf("ffa166")
+            speedMultiplier = 0.8f
+            healthMultiplier = 0.8f
+            damage = 1f
+            effect = ReFX.melting
+        }
     }
 }
