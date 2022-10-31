@@ -10,12 +10,12 @@ class ReBullets {
         lateinit var acidWave: BulletType
 
         fun load() {
-            acidWave = object : LiquidBulletType(ReLiquids.acid) {}.apply {
+            acidWave = LiquidBulletType(ReLiquids.acid).apply {
                 damage = 4f;
                 drag = 0.01f;
             }
 
-            acidTsunami = object : LiquidBulletType(ReLiquids.acid) {}.apply {
+            acidTsunami = LiquidBulletType(ReLiquids.acid).apply {
                 lifetime = 49f;
                 speed = 4f;
                 knockback = 1.3f;

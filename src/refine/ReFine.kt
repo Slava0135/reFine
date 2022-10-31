@@ -6,6 +6,7 @@ import mindustry.content.Items
 import mindustry.mod.Mod
 import mindustry.type.ItemStack
 import mindustry.world.blocks.defense.turrets.LiquidTurret
+import mindustry.world.blocks.environment.Floor
 import mindustry.world.blocks.environment.OreBlock
 import refine.content.*
 
@@ -24,9 +25,13 @@ class ReFine : Mod() {
 
         Items.coal.hardness = 1
 
-        (Vars.content.block("ore-copper") as OreBlock).itemDrop = ReItems.rawCopper
-        (Vars.content.block("ore-lead") as OreBlock).itemDrop = ReItems.rawLead
-        (Vars.content.block("ore-titanium") as OreBlock).itemDrop = ReItems.rawTitanium
+        (Blocks.oreCopper as OreBlock).itemDrop = ReItems.rawCopper
+        (Blocks.oreLead as OreBlock).itemDrop = ReItems.rawLead
+        (Blocks.oreTitanium as OreBlock).itemDrop = ReItems.rawTitanium
+
+        (Blocks.basalt as Floor).itemDrop = ReItems.basalt
+        (Blocks.hotrock as Floor).itemDrop = ReItems.basalt
+        (Blocks.magmarock as Floor).itemDrop = ReItems.basalt
 
         (Blocks.tsunami as LiquidTurret).ammoTypes.put(ReLiquids.acid, ReBullets.acidTsunami)
         (Blocks.wave as LiquidTurret).ammoTypes.put(ReLiquids.acid, ReBullets.acidWave)

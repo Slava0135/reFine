@@ -25,26 +25,26 @@ class ReBlocks {
 
         fun load() {
 
-            oreBasalt = object : OreBlock(ReItems.basalt) {}.apply {
+            oreBasalt = OreBlock(ReItems.basalt).apply {
                 oreDefault = true
                 oreThreshold = 0.88f
                 oreScale = 24.5f
             }
 
-            furnace = object : Furnace("furnace") {}.apply {
+            furnace = Furnace("furnace").apply {
                 requirements(Category.production, ItemStack.with(ReItems.basalt, 12))
                 size = 2
                 alwaysUnlocked = true
             }
 
-            electricFurnace = object : ElectricFurnace("electric-furnace") {}.apply {
+            electricFurnace = ElectricFurnace("electric-furnace").apply {
                 requirements(Category.production, ItemStack.with(ReItems.basalt, 35, Items.graphite, 35, Items.titanium, 35))
                 consumePower(1f)
                 size = 3
                 alwaysUnlocked = true
             }
 
-            sulfurCentrifuge = object : GenericCrafter("sulfur-centrifuge") {}.apply {
+            sulfurCentrifuge = GenericCrafter("sulfur-centrifuge").apply {
                 requirements(Category.crafting, ItemStack.with(Items.titanium, 50, Items.graphite, 40, Items.lead, 30))
                 craftEffect = Fx.coalSmeltsmoke
                 outputItem = ItemStack(ReItems.sulfur, 1)
@@ -61,7 +61,7 @@ class ReBlocks {
                 alwaysUnlocked = true
             }
 
-            acidMixer = object : AcidMixer("acid-mixer") {}.apply {
+            acidMixer = AcidMixer("acid-mixer").apply {
                 requirements(Category.crafting, ItemStack.with(Items.lead, 65, Items.silicon, 40, Items.titanium, 60))
                 outputLiquid = LiquidStack(ReLiquids.acid, 0.1f)
                 craftTime = 60f

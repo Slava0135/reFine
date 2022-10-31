@@ -9,7 +9,7 @@ class ReLiquids {
         lateinit var acid: Liquid
 
         fun load() {
-            acid = object : Liquid("acid") {}.apply {
+            acid = Liquid("acid").apply {
                 temperature = 0.5f
                 viscosity = 0.5f
                 heatCapacity = 0.4f

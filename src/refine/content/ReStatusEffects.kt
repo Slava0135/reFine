@@ -14,7 +14,7 @@ class ReStatusEffects {
         lateinit var dissolving: StatusEffect
 
         fun load() {
-            dissolving = object : StatusEffect("dissolving") {}.apply {
+            dissolving = StatusEffect("dissolving").apply {
                 color = Color.valueOf("ffa166")
                 speedMultiplier = 0.8f
                 healthMultiplier = 0.8f
