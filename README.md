@@ -3,11 +3,16 @@
 # V3 - mindustry V7 support
 ## Additions
 * Makes the game more challenging
+* Not designed for campaign: you need fuel for furnaces and basalt - to make them in the first place
 #### Raw resources
-* Now Copper/Lead/Titanium ore drops **raw Copper/Lead/Titanium** that has to be **smelted** in furnaces
+* Now Copper/Lead/Titanium ore drops **raw Copper/Lead/Titanium** which have to be **smelted** in furnaces
 #### Basalt
-* New item required to make furnaces (and Walls) - drops from basalt tiles or basalt ore
+* Item that drops from basalt or hot rock tiles or basalt ore
+* Required to make furnaces and walls
 #### Sulfur
-* New item required to make **pyratite** and **large batteries** (small are unaffected)
+* Item made from oil (similar to oil centrifuge)
+* New item required to make **pyratite** (instead of lead) and **large batteries** (small batteries are unaffected)
 #### Acid
-* New liquid made from sulfur and water similar to water but dealing **more damage** than slug
+* Liquid made from sulfur and water
+* Use as ammo - similar to slug, but it's status effect deals **more damage** than melting
+* Use in Electric Furnace to **double** the output per ore!
