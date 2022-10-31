@@ -3,12 +3,14 @@ package refine.content
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
+import mindustry.gen.Sounds
 import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.type.LiquidStack
 import mindustry.world.Block
 import mindustry.world.blocks.environment.OreBlock
 import mindustry.world.blocks.production.GenericCrafter
+import refine.world.blocks.production.AcidMixer
 import refine.world.blocks.production.ElectricFurnace
 import refine.world.blocks.production.Furnace
 
@@ -44,11 +46,14 @@ class ReBlocks {
 
             sulfurCentrifuge = object : GenericCrafter("sulfur-centrifuge") {}.apply {
                 requirements(Category.crafting, ItemStack.with(Items.titanium, 50, Items.graphite, 40, Items.lead, 30))
-                craftEffect = Fx.smeltsmoke
+                craftEffect = Fx.coalSmeltsmoke
                 outputItem = ItemStack(ReItems.sulfur, 1)
                 craftTime = 30f
                 size = 2
-                hasPower = true.also { hasLiquids = it }.also { hasItems = it }
+
+                hasPower = true
+                hasLiquids = true
+                hasItems = true
 
                 consumeLiquid(Liquids.oil, 0.1f)
                 consumePower(1f)
@@ -56,16 +61,19 @@ class ReBlocks {
                 alwaysUnlocked = true
             }
 
-            acidMixer = object : GenericCrafter("acid-mixer") {}.apply {
+            acidMixer = object : AcidMixer("acid-mixer") {}.apply {
                 requirements(Category.crafting, ItemStack.with(Items.lead, 65, Items.silicon, 40, Items.titanium, 60))
                 outputLiquid = LiquidStack(ReLiquids.acid, 0.1f)
                 craftTime = 60f
                 size = 2
+
+                craftEffect = Fx.steam
+                ambientSound = Sounds.release
+
                 hasPower = true
                 hasItems = true
                 hasLiquids = true
-                rotate = false
-                solid = true
+
                 outputsLiquid = true
 
                 consumePower(1f)
