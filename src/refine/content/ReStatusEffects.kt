@@ -11,16 +11,16 @@ import mindustry.type.StatusEffect
 class ReStatusEffects {
 
     companion object {
-        lateinit var melting: StatusEffect
-    }
+        lateinit var dissolving: StatusEffect
 
-    fun load() {
-        melting = object : StatusEffect("acid-melting") {}.apply {
-            color = Color.valueOf("ffa166")
-            speedMultiplier = 0.8f
-            healthMultiplier = 0.8f
-            damage = 1f
-            effect = ReFX.melting
+        fun load() {
+            dissolving = object : StatusEffect("dissolving") {}.apply {
+                color = Color.valueOf("ffa166")
+                speedMultiplier = 0.8f
+                healthMultiplier = 0.8f
+                damage = 1f
+                effect = ReFX.dissolving
+            }
         }
     }
 }

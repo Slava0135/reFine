@@ -10,13 +10,17 @@ import mindustry.world.blocks.environment.OreBlock
 import refine.content.*
 
 class ReFine : Mod() {
+
+    init {
+
+    }
     override fun loadContent() {
-        ReItems().load()
-        ReLiquids().load()
-        ReFX().load()
-        ReBlocks().load()
-        ReStatusEffects().load()
-        ReBullets().load()
+        ReFX.load()
+        ReStatusEffects.load()
+        ReLiquids.load()
+        ReItems.load()
+        ReBlocks.load()
+        ReBullets.load()
 
         Items.coal.hardness = 1
 

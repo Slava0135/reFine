@@ -20,30 +20,29 @@ class ReBlocks {
         lateinit var electricFurnace: Block
         lateinit var sulfurCentrifuge: Block
         lateinit var acidMixer: Block
-    }
 
-    fun load() {
+        fun load() {
 
-        oreBasalt = object : OreBlock(ReItems.basalt) {}.apply {
-            oreDefault = true
-            oreThreshold = 0.88f
-            oreScale = 24.5f
-        }
+            oreBasalt = object : OreBlock(ReItems.basalt) {}.apply {
+                oreDefault = true
+                oreThreshold = 0.88f
+                oreScale = 24.5f
+            }
 
-        furnace = object : Furnace("furnace") {}.apply {
-            requirements(Category.production, ItemStack.with(ReItems.basalt, 12))
-            size = 2
-            alwaysUnlocked = true
-        }
+            furnace = object : Furnace("furnace") {}.apply {
+                requirements(Category.production, ItemStack.with(ReItems.basalt, 12))
+                size = 2
+                alwaysUnlocked = true
+            }
 
-        electricFurnace = object : ElectricFurnace("electric-furnace") {}.apply {
-            requirements(Category.production, ItemStack.with(ReItems.basalt, 35, Items.graphite, 35, Items.titanium, 35))
-            consumePower(1f)
-            size = 3
-            alwaysUnlocked = true
-        }
+            electricFurnace = object : ElectricFurnace("electric-furnace") {}.apply {
+                requirements(Category.production, ItemStack.with(ReItems.basalt, 35, Items.graphite, 35, Items.titanium, 35))
+                consumePower(1f)
+                size = 3
+                alwaysUnlocked = true
+            }
 
-        sulfurCentrifuge = object : GenericCrafter("sulfur-centrifuge") {}.apply {
+            sulfurCentrifuge = object : GenericCrafter("sulfur-centrifuge") {}.apply {
                 requirements(Category.crafting, ItemStack.with(Items.titanium, 50, Items.graphite, 40, Items.lead, 30))
                 craftEffect = Fx.smeltsmoke
                 outputItem = ItemStack(ReItems.sulfur, 1)
@@ -55,25 +54,26 @@ class ReBlocks {
                 consumePower(1f)
 
                 alwaysUnlocked = true
-        }
+            }
 
-        acidMixer = object : GenericCrafter("acid-mixer") {}.apply {
-            requirements(Category.crafting, ItemStack.with(Items.lead, 65, Items.silicon, 40, Items.titanium, 60))
-            outputLiquid = LiquidStack(ReLiquids.acid, 0.1f)
-            craftTime = 60f
-            size = 2
-            hasPower = true
-            hasItems = true
-            hasLiquids = true
-            rotate = false
-            solid = true
-            outputsLiquid = true
+            acidMixer = object : GenericCrafter("acid-mixer") {}.apply {
+                requirements(Category.crafting, ItemStack.with(Items.lead, 65, Items.silicon, 40, Items.titanium, 60))
+                outputLiquid = LiquidStack(ReLiquids.acid, 0.1f)
+                craftTime = 60f
+                size = 2
+                hasPower = true
+                hasItems = true
+                hasLiquids = true
+                rotate = false
+                solid = true
+                outputsLiquid = true
 
-            consumePower(1f)
-            consumeItem(ReItems.sulfur)
-            consumeLiquid(Liquids.water, 0.1f)
+                consumePower(1f)
+                consumeItem(ReItems.sulfur)
+                consumeLiquid(Liquids.water, 0.1f)
 
-            alwaysUnlocked = true
+                alwaysUnlocked = true
+            }
         }
     }
 }
