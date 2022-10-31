@@ -1,5 +1,6 @@
 package refine.content
 
+import mindustry.content.Blocks
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
@@ -8,8 +9,10 @@ import mindustry.type.Category
 import mindustry.type.ItemStack
 import mindustry.type.LiquidStack
 import mindustry.world.Block
+import mindustry.world.blocks.defense.Wall
 import mindustry.world.blocks.environment.OreBlock
 import mindustry.world.blocks.production.GenericCrafter
+import mindustry.world.meta.Env
 import refine.world.blocks.production.AcidMixer
 import refine.world.blocks.production.ElectricFurnace
 import refine.world.blocks.production.Furnace
@@ -22,6 +25,8 @@ class ReBlocks {
         lateinit var electricFurnace: Block
         lateinit var sulfurCentrifuge: Block
         lateinit var acidMixer: Block
+        lateinit var basaltWall: Block
+        lateinit var basaltWallLarge: Block
 
         fun load() {
 
@@ -79,6 +84,21 @@ class ReBlocks {
                 consumePower(1f)
                 consumeItem(ReItems.sulfur)
                 consumeLiquid(Liquids.water, 0.1f)
+
+                alwaysUnlocked = true
+            }
+
+            basaltWall = Wall("basalt-wall").apply {
+                requirements(Category.defense, ItemStack.with(ReItems.basalt, 6))
+                health = 150
+
+                alwaysUnlocked = true
+            }
+
+            basaltWallLarge = Wall("basalt-wall-large").apply {
+                requirements(Category.defense, ItemStack.with(ReItems.basalt, 24))
+                health = 600
+                size = 2
 
                 alwaysUnlocked = true
             }

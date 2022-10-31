@@ -111,7 +111,7 @@ open class ElectricFurnace(name: String) : Block(name) {
                 if (items[ReItems.getCorrespondingItem(ore)] == itemCapacity) {
                     progress = 0f
                 } else {
-                    warmup = Mathf.lerpDelta(warmup, 1f, 0.02f)
+                    warmup = Mathf.lerpDelta(warmup, power.status, 0.02f)
                     progress += getProgressIncrease(smeltTime)
                 }
             }
