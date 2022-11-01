@@ -34,7 +34,7 @@ open class ElectricFurnace(name: String) : Block(name) {
     override fun setStats() {
         super.setStats()
         stats.add(Stat.productionTime, smeltTime / 60f, StatUnit.seconds)
-        stats.add(Stat.productionTime, 1 / smeltTime / 60f, StatUnit.perSecond)
+        stats.add(Stat.productionTime, 60f / smeltTime, StatUnit.perSecond)
 
         stats.add(Stat.input, ReItems.rawCopper)
         stats.add(Stat.input, ReItems.rawLead)
