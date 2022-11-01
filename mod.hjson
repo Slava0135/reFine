@@ -2,7 +2,7 @@ name: "refine"
 displayName: "reFine"
 author: "Slava0135"
 main: "refine.ReFine"
-description: "Raw materials processing"
+description: "Mod that alters ore processing"
 version: "3.1"
 minGameVersion: 136
 
