@@ -2,7 +2,7 @@ name: "refine"
 displayName: "reFine"
 author: "Slava0135"
 main: "refine.ReFine"
-description: "Mod that alters ore processing"
+description: "Mod that alters ore processing (not designed for campaign!)"
 version: "3.1"
 minGameVersion: 136
 
