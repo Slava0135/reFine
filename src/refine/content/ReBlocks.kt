@@ -1,6 +1,5 @@
 package refine.content
 
-import mindustry.content.Blocks
 import mindustry.content.Fx
 import mindustry.content.Items
 import mindustry.content.Liquids
@@ -12,10 +11,13 @@ import mindustry.world.Block
 import mindustry.world.blocks.defense.Wall
 import mindustry.world.blocks.environment.OreBlock
 import mindustry.world.blocks.production.GenericCrafter
-import mindustry.world.meta.Env
-import refine.world.blocks.production.AcidMixer
+import mindustry.world.draw.DrawDefault
+import mindustry.world.draw.DrawLiquidTile
+import mindustry.world.draw.DrawMulti
+import mindustry.world.draw.DrawRegion
 import refine.world.blocks.production.ElectricFurnace
 import refine.world.blocks.production.Furnace
+
 
 class ReBlocks {
 
@@ -67,8 +69,13 @@ class ReBlocks {
                 alwaysUnlocked = true
             }
 
-            acidMixer = AcidMixer("acid-mixer").apply {
+            acidMixer = GenericCrafter("acid-mixer").apply {
                 requirements(Category.crafting, ItemStack.with(Items.lead, 65, Items.silicon, 40, Items.titanium, 60))
+                drawer = DrawMulti(
+                    DrawRegion("-bottom"),
+                    DrawLiquidTile(ReLiquids.acid),
+                    DrawDefault()
+                )
                 outputLiquid = LiquidStack(ReLiquids.acid, 0.1f)
                 craftTime = 60f
                 size = 2
